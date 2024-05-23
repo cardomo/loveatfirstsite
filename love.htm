@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️ConfessLove</title>
+</head>
+<body>
+    <div class="cns">
+    <center>
+        <h2>www.confesslove.com</h2>
+    </center>
+</div>
+    <div class="main" id="m1">
+        <center>
+            <div class="crs">
+            <h1>❤️C   r   u   s   h❤️</h1>
+        </div>
+            <br><br><br>
+            <h1>Enter your name</h1>
+            <br>
+            <br>
+            <input type="text" placeholder="Enter Name" id="name">
+            <br><br>
+            <button onclick="show()">Next</button>
+        </center>
+    </div>
+    <div class="contant" id="c1">
+        <center>
+            <h4>The one who send you this want to say</h4>
+            <br>
+            <h1>I</h1>
+            <h1 class="heart">❤️</h1>
+            <h1>YOU</h1>
+            <h1>Dear</h1>
+            <h2 id="addname"></h2>
+            <h1>ji</h1>
+        </center>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>--------------------------------------------</h2>
+    <div class="lastt">
+        <h4>📌❗❗This website is made for those who cannot say their crush that the love them 
+        by using this website you can say that you love then</h4>
+    </div>
+    <h2>--------------------------------------------</h2>
+    <div class="creadits">
+        <center>
+     <h3>❤️Thanks for visiting our website❤️</h3>
+        <br>
+        <h3>
+         website credits:
+        </h3>
+        <h5>
+            🌟Idea:(YT:-@Techguru Amit)
+            <br>
+            🌟website made by(Name:-Devansh)-(Insta ID:-ofc_devansh99)
+            <br>
+        </h5>
+    </center>
+
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+
+    }
+    body{
+        background: pink;
+    }
+    .main{
+        padding-top: 30%;
+
+    }
+    input{
+        font-size: 30px;
+        width: 200px;
+        border: 2px solid red;
+        border-radius: 20px;
+        background: transparent;
+        padding-left:10px ;
+
+    }
+    button{
+        padding: 5px;
+        font-size: 40px;
+        background: black;
+        color: white;
+        border: 2px solid gray;
+        border-radius: 20px;
+
+    }
+.contant{
+    display: none;
+    font-size: 30px;
+    font-family: 'pacifico' , cursive;
+    color: red;
+    text-shadow:  0 0 9px blue 
+    0  0 7px #fff,
+    0 0 10px #fff;
+}
+.heart{
+    animation: zoom 0.2s linear;
+    animation-iteration-count: infinite;
+
+}
+.crs{
+    font-size: large;
+    font-family:cursive;
+    justify-content:space-evenly;
+}
+.cns{
+    padding-top: 20%;
+    font-size: small;
+    justify-content:space-evenly;
+}
+
+
+
+</style>
+<script>
+    function show(){
+        var name =document.getElementById
+        ('name').value;
+        if(document.getElementById('name').value=="")
+    {
+        alert('please Type your name');
+    }
+    else{
+        document.getElementById('addname').innerHTML=name;
+        document.getElementById('m1').style.display="none";
+        document.getElementById('c1').style.display="block";
+    }
+}
+</script>
+
