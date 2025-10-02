@@ -1,147 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Billing Tickets</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 70%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            background-color: #fff;
-        }
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ccc;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        input[type="number"] {
-            width: 80px;
-            padding: 5px;
-        }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 25px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .total {
-            text-align: center;
-            font-size: 22px;
-            margin-top: 20px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket Billing</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+        text-align: center;
+    }
+    h1 {
+        color: #333;
+    }
+    .buttons-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    button.item-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    button.item-btn:hover {
+        background-color: #45a049;
+    }
+    .bill {
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 15px;
+        display: inline-block;
+        border-radius: 10px;
+        min-width: 300px;
+    }
+    .bill-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+    button.action-btn {
+        margin: 10px 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+    }
+    button.action-btn:hover {
+        background-color: #0b7dda;
+    }
+    input[type="number"] {
+        width: 80px;
+        padding: 5px;
+        margin-left: 10px;
+    }
+</style>
 </head>
 <body>
-    <h1>Billing Tickets</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price (UTR)</th>
-                <th>Quantity / Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Outer Palace</td>
-                <td>10</td>
-                <td><input type="number" id="outerPalace" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Inner Palace 1</td>
-                <td>15</td>
-                <td><input type="number" id="inner1" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Inner Palace 2</td>
-                <td>15</td>
-                <td><input type="number" id="inner2" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>Inner Palace 3</td>
-                <td>15</td>
-                <td><input type="number" id="inner3" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>All Palaces</td>
-                <td>25</td>
-                <td><input type="number" id="allPalaces" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>VIP Pass</td>
-                <td>35</td>
-                <td><input type="number" id="vipPass" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>VIP Pass+</td>
-                <td>40</td>
-                <td><input type="number" id="vipPlus" value="0" min="0"></td>
-            </tr>
-            <tr>
-                <td>VIP Pass Recharge</td>
-                <td>-</td>
-                <td><input type="number" id="vipRecharge" value="0" min="0"></td>
-            </tr>
-        </tbody>
-    </table>
+<h1>Ticket Billing</h1>
 
-    <button onclick="calculateTotal()">Calculate Total</button>
+<div class="buttons-container">
+    <button class="item-btn" onclick="addItem('Outer Palace', 10)">Outer Palace (10 UTR)</button>
+    <button class="item-btn" onclick="addItem('Inner Palace 1', 15)">Inner Palace 1 (15 UTR)</button>
+    <button class="item-btn" onclick="addItem('Inner Palace 2', 15)">Inner Palace 2 (15 UTR)</button>
+    <button class="item-btn" onclick="addItem('Inner Palace 3', 15)">Inner Palace 3 (15 UTR)</button>
+    <button class="item-btn" onclick="addItem('All Palaces', 25)">All Palaces (25 UTR)</button>
+    <button class="item-btn" onclick="addItem('VIP Pass', 35)">VIP Pass (35 UTR)</button>
+    <button class="item-btn" onclick="addItem('VIP Pass+', 40)">VIP Pass+ (40 UTR)</button>
+</div>
 
-    <div class="total" id="totalAmount">Total: 0 UTR</div>
+<div style="margin-top: 10px;">
+    VIP Pass Recharge: <input type="number" id="vipRechargeInput" value="0" min="0">
+</div>
 
-    <script>
-        function calculateTotal() {
-            const outerPrice = 10;
-            const innerPrice = 15;
-            const allPalacesPrice = 25;
-            const vipPassPrice = 35;
-            const vipPlusPrice = 40;
-            const taxCharges = 1;
+<div>
+    <button class="action-btn" onclick="generateBill()">Generate Bill</button>
+    <button class="action-btn" onclick="resetBill()">Add New / Refresh</button>
+</div>
 
-            const outerQty = parseInt(document.getElementById("outerPalace").value) || 0;
-            const inner1Qty = parseInt(document.getElementById("inner1").value) || 0;
-            const inner2Qty = parseInt(document.getElementById("inner2").value) || 0;
-            const inner3Qty = parseInt(document.getElementById("inner3").value) || 0;
-            const allPalacesQty = parseInt(document.getElementById("allPalaces").value) || 0;
-            const vipQty = parseInt(document.getElementById("vipPass").value) || 0;
-            const vipPlusQty = parseInt(document.getElementById("vipPlus").value) || 0;
-            const vipRecharge = parseInt(document.getElementById("vipRecharge").value) || 0;
+<div class="bill" id="billContainer">
+    <h3>Bill Details</h3>
+    <div id="billItems"></div>
+    <div class="bill-item"><strong>Tax & Charges:</strong> 1 UTR</div>
+    <div class="bill-item"><strong>Total:</strong> 0 UTR</div>
+</div>
 
-            const total = 
-                (outerQty * outerPrice) +
-                (inner1Qty * innerPrice) +
-                (inner2Qty * innerPrice) +
-                (inner3Qty * innerPrice) +
-                (allPalacesQty * allPalacesPrice) +
-                (vipQty * vipPassPrice) +
-                (vipPlusQty * vipPlusPrice) +
-                vipRecharge +
-                taxCharges;
+<script>
+    const bill = {};
+    const taxCharges = 1;
 
-            document.getElementById("totalAmount").innerText = `Total: ${total} UTR (including 1 UTR charges)`;
+    function addItem(name, price) {
+        if (bill[name]) {
+            bill[name].quantity += 1;
+        } else {
+            bill[name] = { price: price, quantity: 1 };
         }
-    </script>
+        displayBill();
+    }
+
+    function displayBill() {
+        const billItemsDiv = document.getElementById('billItems');
+        billItemsDiv.innerHTML = '';
+        let total = 0;
+        for (const item in bill) {
+            const subtotal = bill[item].price * bill[item].quantity;
+            total += subtotal;
+            const div = document.createElement('div');
+            div.classList.add('bill-item');
+            div.innerHTML = `<span>${item} x ${bill[item].quantity}</span><span>${subtotal} UTR</span>`;
+            billItemsDiv.appendChild(div);
+        }
+        // Add VIP Recharge
+        const vipRecharge = parseInt(document.getElementById('vipRechargeInput').value) || 0;
+        if (vipRecharge > 0) {
+            total += vipRecharge;
+            const div = document.createElement('div');
+            div.classList.add('bill-item');
+            div.innerHTML = `<span>VIP Pass Recharge</span><span>${vipRecharge} UTR</span>`;
+            billItemsDiv.appendChild(div);
+        }
+
+        total += taxCharges;
+        const totalDiv = document.createElement('div');
+        totalDiv.classList.add('bill-item');
+        totalDiv.innerHTML = `<strong>Total:</strong> ${total} UTR (including 1 UTR charges)`;
+        billItemsDiv.appendChild(totalDiv);
+    }
+
+    function generateBill() {
+        alert("Bill generated successfully!");
+        displayBill();
+    }
+
+    function resetBill() {
+        for (const item in bill) {
+            delete bill[item];
+        }
+        document.getElementById('vipRechargeInput').value = 0;
+        displayBill();
+    }
+
+    // Initialize empty bill
+    displayBill();
+</script>
 </body>
 </html>
+
