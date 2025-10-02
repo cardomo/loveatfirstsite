@@ -3,147 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❤️ConfessLove</title>
+    <title>Billing Tickets</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 5px;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .total {
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="cns">
-    <center>
-        <h2>www.confesslove.com</h2>
-    </center>
-</div>
-    <div class="main" id="m1">
-        <center>
-            <div class="crs">
-            <h1>❤️C   r   u   s   h❤️</h1>
-        </div>
-            <br><br><br>
-            <h1>Enter your name</h1>
-            <br>
-            <br>
-            <input type="text" placeholder="Enter Name" id="name">
-            <br><br>
-            <button onclick="show()">Next</button>
-        </center>
-    </div>
-    <div class="contant" id="c1">
-        <center>
-            <h4>The one who send you this want to say</h4>
-            <br>
-            <h1>I</h1>
-            <h1 class="heart">❤️</h1>
-            <h1>YOU</h1>
-            <h1>Dear</h1>
-            <h2 id="addname"></h2>
-            <h1>ji</h1>
-        </center>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h2>----------------------------------------------</h2>
-    <div class="lastt">
-        <h4>📌❗❗This website is made for those who cannot say their crush that they love them 
-        by using this website you can say that you love them 
-    </div>
-    <h2>----------------------------------------------</h2>
-    <div class="creadits">
-        <center>
-     <h3>❤️Thanks for visiting our website❤️</h3>
-        <br>
-        <h3>
-         website credits:
-        </h3>
-        <h5>
-            🌟Idea:(YT:-@Techguru Amit)
-            <br>
-            🌟website made by(Name:-Devansh)-(Insta ID:-ofc_devansh99)
-            <br>
-        </h5>
-    </center>
+    <h1>Billing Tickets</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price (UTR)</th>
+                <th>Quantity / Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Outer Palace</td>
+                <td>10</td>
+                <td><input type="number" id="outerPalace" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>Inner Palace 1</td>
+                <td>15</td>
+                <td><input type="number" id="inner1" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>Inner Palace 2</td>
+                <td>15</td>
+                <td><input type="number" id="inner2" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>Inner Palace 3</td>
+                <td>15</td>
+                <td><input type="number" id="inner3" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>All Palaces</td>
+                <td>25</td>
+                <td><input type="number" id="allPalaces" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>VIP Pass</td>
+                <td>35</td>
+                <td><input type="number" id="vipPass" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>VIP Pass+</td>
+                <td>40</td>
+                <td><input type="number" id="vipPlus" value="0" min="0"></td>
+            </tr>
+            <tr>
+                <td>VIP Pass Recharge</td>
+                <td>-</td>
+                <td><input type="number" id="vipRecharge" value="0" min="0"></td>
+            </tr>
+        </tbody>
+    </table>
 
-    </div>
+    <button onclick="calculateTotal()">Calculate Total</button>
+
+    <div class="total" id="totalAmount">Total: 0 UTR</div>
+
+    <script>
+        function calculateTotal() {
+            const outerPrice = 10;
+            const innerPrice = 15;
+            const allPalacesPrice = 25;
+            const vipPassPrice = 35;
+            const vipPlusPrice = 40;
+            const taxCharges = 1;
+
+            const outerQty = parseInt(document.getElementById("outerPalace").value) || 0;
+            const inner1Qty = parseInt(document.getElementById("inner1").value) || 0;
+            const inner2Qty = parseInt(document.getElementById("inner2").value) || 0;
+            const inner3Qty = parseInt(document.getElementById("inner3").value) || 0;
+            const allPalacesQty = parseInt(document.getElementById("allPalaces").value) || 0;
+            const vipQty = parseInt(document.getElementById("vipPass").value) || 0;
+            const vipPlusQty = parseInt(document.getElementById("vipPlus").value) || 0;
+            const vipRecharge = parseInt(document.getElementById("vipRecharge").value) || 0;
+
+            const total = 
+                (outerQty * outerPrice) +
+                (inner1Qty * innerPrice) +
+                (inner2Qty * innerPrice) +
+                (inner3Qty * innerPrice) +
+                (allPalacesQty * allPalacesPrice) +
+                (vipQty * vipPassPrice) +
+                (vipPlusQty * vipPlusPrice) +
+                vipRecharge +
+                taxCharges;
+
+            document.getElementById("totalAmount").innerText = `Total: ${total} UTR (including 1 UTR charges)`;
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-
-    }
-    body{
-        background: pink;
-    }
-    .main{
-        padding-top: 30%;
-
-    }
-    input{
-        font-size: 30px;
-        width: 200px;
-        border: 2px solid red;
-        border-radius: 20px;
-        background: transparent;
-        padding-left:10px ;
-
-    }
-    button{
-        padding: 5px;
-        font-size: 40px;
-        background: black;
-        color: white;
-        border: 2px solid gray;
-        border-radius: 20px;
-
-    }
-.contant{
-    display: none;
-    font-size: 30px;
-    font-family: 'pacifico' , cursive;
-    color: red;
-    text-shadow:  0 0 9px blue 
-    0  0 7px #fff,
-    0 0 10px #fff;
-}
-.heart{
-    animation: zoom 0.2s linear;
-    animation-iteration-count: infinite;
-
-}
-.crs{
-    font-size: large;
-    font-family:cursive;
-    justify-content:space-evenly;
-}
-.cns{
-    padding-top: 20%;
-    font-size: small;
-    justify-content:space-evenly;
-}
-
-
-
-</style>
-<script>
-    function show(){
-        var name =document.getElementById
-        ('name').value;
-        if(document.getElementById('name').value=="")
-    {
-        alert('please Type your name');
-    }
-    else{
-        document.getElementById('addname').innerHTML=name;
-        document.getElementById('m1').style.display="none";
-        document.getElementById('c1').style.display="block";
-    }
-}
-</script>
-
